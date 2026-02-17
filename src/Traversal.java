@@ -18,7 +18,7 @@ public class Traversal {
     root2.right.left = new TreeNode<String>("am", null, null);
     root2.right.right = new TreeNode<String>("so", null, null);
     root2.right.right.right = new TreeNode<String>("good", null, null);
-
+/* 
     System.out.println("======PRE ORDER======");
     preorder(root);
     System.out.println("======POST ORDER======");
@@ -27,6 +27,13 @@ public class Traversal {
     inorder(root);
 
     printGreater(root, 7);
+*/
+    System.out.println(countNodes(root));
+  }
+
+  public static int countNodes(TreeNode<?> node) {
+    if(node == null) return 0;
+    return 1 + countNodes(node.left) + countNodes(node.right);
   }
 
   public static void printGreater(TreeNode<Integer> node, int threshold) {
