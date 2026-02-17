@@ -9,12 +9,33 @@ public class Traversal {
     root.right.right = new TreeNode<Integer>(5, null, null);
     root.right.right.right = new TreeNode<Integer>(22, null, null);
 
+
+    TreeNode<String> root2 = new TreeNode<String>("hello", null, null);
+    root2.left = new TreeNode<String>("how", null, null);
+    root2.left.left = new TreeNode<String>("are", null, null);
+    root2.left.right = new TreeNode<String>("you", null, null);
+    root2.right = new TreeNode<String>("i", null, null);
+    root2.right.left = new TreeNode<String>("am", null, null);
+    root2.right.right = new TreeNode<String>("so", null, null);
+    root2.right.right.right = new TreeNode<String>("good", null, null);
+
     System.out.println("======PRE ORDER======");
     preorder(root);
     System.out.println("======POST ORDER======");
     postorder(root);
     System.out.println("======IN ORDER======");
     inorder(root);
+
+    printGreater(root, 7);
+  }
+
+  public static void printGreater(TreeNode<Integer> node, int threshold) {
+    if(node == null) return;
+    if(node.value > threshold) {
+      System.out.println(node.value);
+    }
+    printGreater(node.left, threshold);
+    printGreater(node.right, threshold);
   }
 
     //print tree rooted at given node in pre-order.
