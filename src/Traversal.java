@@ -1,5 +1,8 @@
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
+import java.util.Queue;
 
 public class Traversal {
   public static void main(String[] args) {
@@ -31,8 +34,62 @@ public class Traversal {
 
     printGreater(root, 7);
 */
-    System.out.println(countNodes(root));
+    //System.out.println(countNodes(root));
+
+    TreeNode<Integer> megaRoot = new TreeNode<Integer>(1, null, null);
+
+    TreeNode<Integer> current = megaRoot;
+
+    for(int i = 2; i <= 50000; i++) {
+      current.right = new TreeNode<Integer>(i, null, null);
+      current = current.right;
+    }
+
+
+    levelOrder(root);
+    //preOrderIter(megaRoot);
+
+    /*System.out.println("Preorder recursive");
+    preorder(root);
+    System.out.println("Preorder iterative");
+    preOrderIter(root);*/
   }
+
+  public static <T> void preOrderIter(TreeNode<T> node) {
+    Stack<TreeNode<T>> stack = new Stack<>();
+    stack.push(node);
+  
+    while(!stack.empty()) {
+      TreeNode<T> current = stack.pop();
+      if(current == null) continue;
+
+      System.out.println(current.value);
+      stack.push(current.right);
+      stack.push(current.left);
+    }
+  }
+  public static <T> void levelOrder(TreeNode<T> node) {
+    Queue<TreeNode<T>> queue = new LinkedList<>();
+    queue.add(node);
+  
+    while(!queue.isEmpty()) {
+      TreeNode<T> current = queue.poll();
+      if(current == null) continue;
+
+      System.out.println(current.value);
+      queue.add(current.left);
+      queue.add(current.right);
+    }
+  }
+
+    //print tree rooted at given node in pre-order.
+  public static void preorder(TreeNode<?> node) {
+    if(node == null) return;
+    System.out.println(node.value);
+    preorder(node.left);
+    preorder(node.right);
+  }
+
 
   public static int countNodes(TreeNode<?> node) {
     if(node == null) return 0;
@@ -46,14 +103,6 @@ public class Traversal {
     }
     printGreater(node.left, threshold);
     printGreater(node.right, threshold);
-  }
-
-    //print tree rooted at given node in pre-order.
-  public static void preorder(TreeNode<?> node) {
-    if(node == null) return;
-    System.out.println(node.value);
-    preorder(node.left);
-    preorder(node.right);
   }
 
   public static void postorder(TreeNode<?> node) {
